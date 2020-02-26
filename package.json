@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "npm-run-all --parallel build:esm watch:js:build start:server",
-    "build:esm": "snowpack --include \"src/**/*.js\" --dest dist/web_modules",
+    "build:esm": "snowpack --include \"src/**/*.js\" --dest dist/web_modules --hash --source-map",
     "build:js": "babel src/ --out-dir dist",
     "watch:js:build": "babel src/ --out-dir dist --watch",
     "start:server": "es-dev-server index.html --watch --open"

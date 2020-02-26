@@ -1,6 +1,6 @@
 {
   "imports": {
-    "htm": "./htm.js",
-    "hyperapp": "./hyperapp.js"
+    "htm": "./htm.js?rev=d43fbd8039",
+    "hyperapp": "./hyperapp.js?rev=b1efa64065"
   }
 }

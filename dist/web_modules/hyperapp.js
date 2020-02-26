@@ -483,3 +483,4 @@ var app = function(props) {
 };
 
 export { Lazy, app, h };
+//# sourceMappingURL=hyperapp.js.map
