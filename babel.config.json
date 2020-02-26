@@ -6,6 +6,7 @@
       {
         "pragma": "hyperapp.h"
       }
-    ]
+    ],
+    ["snowpack/assets/babel-plugin.js", { "dir": "dist/web_modules" }]
   ]
 }
