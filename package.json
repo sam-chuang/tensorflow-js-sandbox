@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --open",
+    "start": "es-dev-server index.html --node-resolve --babel --watch --open",
     "build": "parcel build index.html"
   },
-  "dependencies": {},
+  "dependencies": {
+    "babel-plugin-htm": "^3.0.0",
+    "htm": "^3.0.3",
+    "hyperapp": "^2.0.4"
+  },
   "devDependencies": {
-    "@babel/core": "7.2.0",
+    "@babel/core": "^7.8.4",
+    "es-dev-server": "^1.40.1",
     "parcel-bundler": "^1.6.1"
   },
   "keywords": []
