@@ -2,13 +2,14 @@
   "name": "tensorflow-sandbox",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "type": "module",
   "scripts": {
-    "start": "npm-run-all --parallel build:esm watch:js:build start:server",
+    "start": "npm-run-all --parallel build:esm build:js:watch start:server",
+    "start:server": "es-dev-server index.html --watch --open",
     "build:esm": "snowpack --include \"src/**/*.js\" --dest dist/web_modules --hash --source-map",
     "build:js": "babel src/ --out-dir dist",
-    "watch:js:build": "babel src/ --out-dir dist --watch",
-    "start:server": "es-dev-server index.html --watch --open"
+    "build:js:watch": "babel src/ --out-dir dist --watch",
+    "build:index-page": "node --experimental-modules index.html.js"
   },
   "dependencies": {
     "babel-plugin-htm": "^3.0.0",
@@ -20,7 +21,9 @@
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
     "es-dev-server": "^1.40.1",
+    "fs-extra": "^8.1.0",
     "snowpack": "^1.4.0"
   },
   "keywords": []
