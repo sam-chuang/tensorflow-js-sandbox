@@ -19,7 +19,7 @@ const document = `
   <body>
     <div id="app"></div>
 
-    <script type="module" src="dist/index.js"></script>
+    <script type="module" src="index.js"></script>
   </body>
 </html>
 `
