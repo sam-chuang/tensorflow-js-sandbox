@@ -1,5 +1,14 @@
 {
-  "presets": [],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ]
+  ],
   "plugins": [
     [
       "htm",

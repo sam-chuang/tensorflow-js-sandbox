@@ -29,6 +29,8 @@ await model.fit(tensors.trainFeatures, tensors.trainTarget, {
 
       //TODO
       await ui.plotData(epoch, trainLoss, valLoss)
+
+
     }
   }
 })
@@ -45,3 +47,7 @@ await ui.updateStatus(
     `Final validation-set loss: ${valLoss.toFixed(4)}\n` +
     `Test-set loss: ${testLoss.toFixed(4)}`
 )
+
+export const run = () => {
+  
+}
