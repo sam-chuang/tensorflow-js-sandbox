@@ -1,13 +1,11 @@
-//import * as tf from "@tensorflow/tfjs"
 import * as tf from "@tensorflow/tfjs-node"
-//import * as tfvis from "@tensorflow/tfjs-vis"
 
 const LearningRate = 0.01
 const NUM_EPOCHS = 200
 const BATCH_SIZE = 40
 
 //TODO
-export const train = async (model = linearRegression(), {}) => {
+export const train = async (model, {}) => {
   model.compile({
     optimizer: tf.train.sgd(LEARNING_RATE),
     loss: "meanSquaredError"
@@ -52,8 +50,4 @@ export const linearRegression = numberOfFeatures => {
   const model = tf.sequential()
   model.add(tf.layers.dense({ inputShape: [numberOfFeatures], units: 1 }))
   return model
-}
-
-export default {
-  linearRegression
 }

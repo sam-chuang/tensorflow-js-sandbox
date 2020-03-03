@@ -12,20 +12,17 @@
     "build:index-page": "node --experimental-modules index.html.js"
   },
   "dependencies": {
-    "@tensorflow/tfjs": "^1.5.2",
-    "@tensorflow/tfjs-vis": "^1.4.0",
+    "@tensorflow/tfjs-node": "^1.5.2",
     "babel-plugin-htm": "^3.0.0",
     "htm": "^3.0.3",
     "hyperapp": "^2.0.4",
     "npm-run-all": "^4.1.5",
-    "papaparse": "^5.1.1",
-    "save-dev": "0.0.1-security"
+    "papaparse": "^5.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.6",
-    "@tensorflow/tfjs-node": "^1.5.2",
     "es-dev-server": "^1.40.1",
     "fs-extra": "^8.1.0",
     "jest": "^25.1.0",

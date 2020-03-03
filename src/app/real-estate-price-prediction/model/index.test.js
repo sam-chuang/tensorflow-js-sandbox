@@ -1,7 +1,8 @@
-import { linearRegression, train, test } from "./index"
+import * as model from "./index"
 
 test("create linear regression model", () => {
-  let model = linearRegression()
+  let numberOfFeatures = 12
+  let model = model.linearRegression(numberOfFeatures)
 
   expect(model).toBeDefined()
 })
