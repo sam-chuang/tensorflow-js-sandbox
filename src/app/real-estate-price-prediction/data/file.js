@@ -1,3 +1,7 @@
+import fs from "fs-extra"
+import { csv as parseCSV } from "./parse"
+import pathOf from "../../../file/path"
+
 const TrainFeatures = "train-data.csv"
 
 const TrainTarget = "train-target.csv"
@@ -13,5 +17,8 @@ export const Names = {
   TestTarget
 }
 
-//TODO: read from local file
-export const read = () => {}
+export const data = name => {
+  let path = pathOf(name)
+  let contents = fs.readFileSync(path)
+  return parseCSV(contents)
+}
