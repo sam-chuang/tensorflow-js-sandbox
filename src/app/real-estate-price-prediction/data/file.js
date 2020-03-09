@@ -1,6 +1,8 @@
 import fs from "fs-extra"
-import { csv as parseCSV } from "./parse"
-import pathOf from "../../../file/path"
+import { normalize, resolve } from "path"
+//import { csv as parseCSV } from "./parse"
+import parseCSV from "neat-csv"
+import { csv as formatCSV } from "./parse"
 
 const TrainFeatures = "train-data.csv"
 
@@ -17,8 +19,8 @@ export const Names = {
   TestTarget
 }
 
-export const data = name => {
-  let path = pathOf(name)
-  let contents = fs.readFileSync(path)
-  return parseCSV(contents)
+export const data = async name => {
+  let path = resolve(__dirname, name)
+  let stream = fs.createReadStream(path, "utf8")
+  return parseCSV(stream).then(formatCSV)
 }
