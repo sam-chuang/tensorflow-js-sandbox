@@ -22,11 +22,19 @@ export const from = ({
   }
 }
 
-export const fromFile = () => {
-  let trainFeatures = data(FileNames.TrainFeatures)
-  let trainTarget = data(FileNames.TrainTarget)
-  let testFeatures = data(FileNames.TestFeatures)
-  let testTarget = data(FileNames.TestTarget)
+export const fromFile = async () => {
+  let [
+    trainFeatures,
+    trainTarget,
+    testFeatures,
+    testTarget
+  ] = await Promise.all([
+    data(FileNames.TrainFeatures),
+    data(FileNames.TrainTarget),
+    data(FileNames.TestFeatures),
+    data(FileNames.TestTarget)
+  ])
+
   return from({
     trainFeatures,
     trainTarget,
@@ -34,3 +42,5 @@ export const fromFile = () => {
     testTarget
   })
 }
+
+export default fromFile

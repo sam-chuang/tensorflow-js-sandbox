@@ -1,6 +1,5 @@
 import fs from "fs-extra"
-import { normalize, resolve } from "path"
-//import { csv as parseCSV } from "./parse"
+import { resolve } from "path"
 import parseCSV from "neat-csv"
 import { csv as formatCSV } from "./parse"
 
