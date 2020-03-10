@@ -4,14 +4,14 @@ const LearningRate = 0.01
 const NUM_EPOCHS = 200
 const BATCH_SIZE = 40
 
+const VoidFunction = () => {}
+
 //TODO
-export const train = async (model, {}) => {
+export const train = async (model, { onEpochEnd = VoidFunction } = {}) => {
   model.compile({
     optimizer: tf.train.sgd(LEARNING_RATE),
     loss: "meanSquaredError"
   })
-
-  let trainLogs = []
 
   await model.fit(tensors.trainFeatures, tensors.trainTarget, {
     batchSize: BATCH_SIZE,
@@ -19,11 +19,8 @@ export const train = async (model, {}) => {
     validationSplit: 0.2,
     callbacks: {
       onEpochEnd: async (epoch, logs) => {
+        onEpochEnd(epoch, logs)
         console.log(`Epoch ${epoch + 1} of ${NUM_EPOCHS} completed.`)
-
-        trainLogs.push(logs)
-        //TODO
-        //tfvis.show.history(container, trainLogs, ["loss", "val_loss"])
 
         //TODO
         /*

@@ -1,11 +1,13 @@
-import { dirname } from "path"
+import { dirname, resolve } from "path"
 import { fileURLToPath } from "url"
 import fs from "fs-extra"
 
+/*
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(fileURLToPath(import.meta.url))
-
-console.log("__filename", __filename, "__dirname", __dirname)
+*/
+const __dirname = resolve(process.cwd(), "./dist")
+console.log("cwd", process.cwd(), "__dirname", __dirname)
 
 //TODO: get version from package.json
 const document = `
@@ -19,10 +21,13 @@ const document = `
   <body>
     <div id="app"></div>
 
-    <script type="module" src="index.js"></script>
+    <script type="module">
+      import app from './index.js'
+      app(document.getElementById("app"))
+    </script>
   </body>
 </html>
 `
 
 //TODO: get dist folder from setting?
-fs.outputFileSync(`${__dirname}/dist/index.html`, document)
+fs.outputFileSync(`${__dirname}/index.html`, document)
