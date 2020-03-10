@@ -1,7 +1,7 @@
-import Dataset from "./dataset"
+import getDataset from "./dataset"
 
 test("dataset", async () => {
-  let dataset = await Dataset()
+  let dataset = await getDataset()
   let { trainFeatures, trainTarget, testFeatures, testTarget } = dataset
 
   expect(trainFeatures)

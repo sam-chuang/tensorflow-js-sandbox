@@ -13,7 +13,6 @@
     "copy:esm": "copyfiles -a web_modules/* dist"
   },
   "dependencies": {
-    "@tensorflow/tfjs-node": "^1.6.0",
     "htm": "^3.0.3",
     "hyperapp": "^2.0.4",
     "papaparse": "^5.1.1"
@@ -22,6 +21,7 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.6",
+    "@tensorflow/tfjs-node": "1.4.0",
     "babel-plugin-htm": "^3.0.0",
     "copyfiles": "^2.2.0",
     "csv-parser": "^2.3.2",
