@@ -2,6 +2,9 @@ import * as tf from "@tensorflow/tfjs-node"
 import { linearRegression, train } from "./index"
 import getDataset from "../data/dataset"
 
+let Second = 1000
+jest.setTimeout(60 * Second)
+
 test("linear regression model", async () => {
   let dataset = await getDataset()
 
@@ -12,9 +15,14 @@ test("linear regression model", async () => {
   let history = await train({
     model,
     tensors: {
-      trainFeatures: tf.tensor2d(dataset.trainFeatures),
-      trainTarget: tf.tensor2d(dataset.trainTarget)
+      trainFeatures: dataset.trainFeatures,
+      trainTarget: dataset.trainTarget
     }
   })
+
   expect(history).toBeDefined()
+
+  //TODO: get last val_loss from history
+  //TODO: get last loss from history
+  //TODO: compare with baseline
 })

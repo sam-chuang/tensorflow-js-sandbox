@@ -1,5 +1,7 @@
 import { data, Names as FileNames } from "./file"
 import shuffle from "./shuffle"
+import * as tf from "@tensorflow/tfjs-node"
+import { normalize, meanAndStandardDeviation } from "./normalize"
 
 export const from = ({
   trainFeatures = [],
@@ -43,4 +45,32 @@ export const fromFile = async () => {
   })
 }
 
-export default fromFile
+const toTensors = dataset => {
+  let {
+    trainFeatures: rawTrainFeatures,
+    trainTarget: rawTrainTarget,
+    testFeatures: rawTestFeatures,
+    testTarget: rawTestTarget
+  } = dataset
+
+  let trainFeatures = tf.tensor2d(rawTrainFeatures)
+  let { dataMean, dataStd } = meanAndStandardDeviation(trainFeatures)
+
+  let trainTarget = tf.tensor2d(rawTrainTarget)
+  let testFeatures = tf.tensor2d(rawTestFeatures)
+  let testTarget = tf.tensor2d(rawTestTarget)
+
+  return {
+    ...dataset,
+    raw: dataset,
+    trainFeatures: normalize(trainFeatures, dataMean, dataStd),
+    trainTarget,
+    testFeatures: normalize(testFeatures, dataMean, dataStd),
+    testTarget
+  }
+}
+
+export default async () => {
+  let dataset = await fromFile()
+  return toTensors(dataset)
+}

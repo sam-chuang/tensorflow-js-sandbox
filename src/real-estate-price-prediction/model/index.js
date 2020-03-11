@@ -11,8 +11,7 @@ export const train = async ({ model, tensors }, {} = {}) => {
     loss: "meanSquaredError"
   })
 
-  //TODO: check tensors trainFeatures and trainTarget
-  await model.fit(tensors.trainFeatures, tensors.trainTarget, {
+  return await model.fit(tensors.trainFeatures, tensors.trainTarget, {
     batchSize: BATCH_SIZE,
     epochs: NUM_EPOCHS,
     validationSplit: 0.2,
@@ -20,7 +19,7 @@ export const train = async ({ model, tensors }, {} = {}) => {
       onEpochEnd: async (epoch, logs) => {
         //TODO:
         //onEpochEnd(epoch, logs)
-        console.log(`Epoch ${epoch + 1} of ${NUM_EPOCHS} completed.`)
+        console.log(`Epoch ${epoch + 1} of ${NUM_EPOCHS} completed.`, logs)
 
         //TODO?
         /*
