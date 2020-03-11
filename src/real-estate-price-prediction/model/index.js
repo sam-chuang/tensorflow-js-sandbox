@@ -38,9 +38,6 @@ export const train = async ({ model, tensors }, {} = {}) => {
   })
 }
 
-//TODO
-export const test = () => {}
-
 //TODO inputShape instead of numberOfFeatures param?
 export const linearRegression = numberOfFeatures => {
   const model = tf.sequential()

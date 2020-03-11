@@ -1,6 +1,6 @@
 import getDataset, { fromFile as getDatasetFromFile } from "./dataset"
 
-test("dataset from file", async () => {
+test("raw dataset from file", async () => {
   let dataset = await getDatasetFromFile()
   let { trainFeatures, trainTarget, testFeatures, testTarget } = dataset
 
@@ -32,7 +32,13 @@ test("tensors dataset", async () => {
   let numberOfFeatures = dataset.numberOfFeatures()
   expect(numberOfFeatures).toBePositive()
 
-  let { trainFeatures, trainTarget, testFeatures, testTarget } = dataset
+  let {
+    trainFeatures,
+    trainTarget,
+    testFeatures,
+    testTarget,
+    baselineLoss
+  } = dataset
   expect(trainFeatures).toBeDefined()
 
   expect(trainTarget).toBeDefined()
@@ -40,4 +46,8 @@ test("tensors dataset", async () => {
   expect(testFeatures).toBeDefined()
 
   expect(testTarget).toBeDefined()
+
+  expect(baselineLoss)
+    .toBeNumber()
+    .toBePositive()
 })

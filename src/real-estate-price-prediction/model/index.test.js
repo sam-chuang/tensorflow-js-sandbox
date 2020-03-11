@@ -1,4 +1,3 @@
-import * as tf from "@tensorflow/tfjs-node"
 import { linearRegression, train } from "./index"
 import getDataset from "../data/dataset"
 
@@ -12,7 +11,7 @@ test("linear regression model", async () => {
   let model = linearRegression(numberOfFeatures)
   expect(model).toBeDefined()
 
-  let history = await train({
+  let result = await train({
     model,
     tensors: {
       trainFeatures: dataset.trainFeatures,
@@ -20,9 +19,29 @@ test("linear regression model", async () => {
     }
   })
 
+  expect(result).toBeDefined()
+
+  let { history } = result
   expect(history).toBeDefined()
 
-  //TODO: get last val_loss from history
-  //TODO: get last loss from history
-  //TODO: compare with baseline
+  let { loss, val_loss } = history
+  expect(loss)
+    .toBeArray()
+    .not.toBeEmpty()
+
+  expect(val_loss)
+    .toBeArray()
+    .not.toBeEmpty()
+
+  let lastLoss = loss[loss.length - 1]
+  let lastValLoss = val_loss[val_loss.length - 1]
+
+  expect(lastLoss)
+    .toBeNumber()
+    .toBePositive()
+    .toBeLessThan(dataset.baselineLoss)
+  expect(lastValLoss)
+    .toBeNumber()
+    .toBePositive()
+    .toBeLessThan(dataset.baselineLoss)
 })

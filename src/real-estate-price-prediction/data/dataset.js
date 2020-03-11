@@ -63,11 +63,21 @@ const toTensors = dataset => {
   return {
     ...dataset,
     raw: dataset,
+    baselineLoss: baselineLoss({ trainTarget, testTarget }),
     trainFeatures: normalize(trainFeatures, dataMean, dataStd),
     trainTarget,
     testFeatures: normalize(testFeatures, dataMean, dataStd),
     testTarget
   }
+}
+
+const baselineLoss = ({ trainTarget, testTarget }) => {
+  const avgPrice = trainTarget.mean()
+  const baseline = testTarget
+    .sub(avgPrice)
+    .square()
+    .mean()
+  return baseline.dataSync()[0]
 }
 
 export default async () => {
