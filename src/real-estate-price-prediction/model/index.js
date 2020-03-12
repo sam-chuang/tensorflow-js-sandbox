@@ -4,43 +4,64 @@ const LearningRate = 0.01
 const NUM_EPOCHS = 200
 const BATCH_SIZE = 40
 
-//TODO
-export const train = async ({ model, tensors }, {} = {}) => {
+const NoMessage = 0
+
+export const train = async (
+  { model, tensors },
+  { optimizer, loss = "meanSquaredError", metrics, callbacks } = {}
+) => {
   model.compile({
-    optimizer: tf.train.sgd(LearningRate),
-    loss: "meanSquaredError"
+    optimizer: optimizer ?? tf.train.sgd(LearningRate),
+    loss,
+    metrics
   })
 
   return await model.fit(tensors.trainFeatures, tensors.trainTarget, {
     batchSize: BATCH_SIZE,
     epochs: NUM_EPOCHS,
     validationSplit: 0.2,
-    callbacks: {
-      onEpochEnd: async (epoch, logs) => {
-        //TODO:
-        //onEpochEnd(epoch, logs)
-        console.log(`Epoch ${epoch + 1} of ${NUM_EPOCHS} completed.`, logs)
-
-        //TODO?
-        /*
-        if (weightsIllustration) {
-          model.layers[0]
-            .getWeights()[0]
-            .data()
-            .then(kernelAsArr => {
-              const weightsList = describeKernelElements(kernelAsArr)
-              ui.updateWeightDescription(weightsList)
-            })
-        }
-        */
-      }
-    }
+    callbacks,
+    verbose: NoMessage
   })
 }
 
-//TODO inputShape instead of numberOfFeatures param?
 export const linearRegression = numberOfFeatures => {
   const model = tf.sequential()
   model.add(tf.layers.dense({ inputShape: [numberOfFeatures], units: 1 }))
+  return model
+}
+
+export const nonlinearTwoLayerRegression = numberOfFeatures => {
+  const model = tf.sequential()
+  model.add(
+    tf.layers.dense({
+      inputShape: [numberOfFeatures],
+      units: 50,
+      activation: "sigmoid",
+      kernelInitializer: "leCunNormal"
+    })
+  )
+  model.add(tf.layers.dense({ units: 1 }))
+  return model
+}
+
+export const nonlinearMultiLayerRegression = numberOfFeatures => {
+  const model = tf.sequential()
+  model.add(
+    tf.layers.dense({
+      inputShape: [numberOfFeatures],
+      units: 50,
+      activation: "sigmoid",
+      kernelInitializer: "leCunNormal"
+    })
+  )
+  model.add(
+    tf.layers.dense({
+      units: 50,
+      activation: "sigmoid",
+      kernelInitializer: "leCunNormal"
+    })
+  )
+  model.add(tf.layers.dense({ units: 1 }))
   return model
 }
